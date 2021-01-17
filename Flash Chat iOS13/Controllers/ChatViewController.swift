@@ -13,9 +13,17 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
+    var messages = [
+        Message(sender: "seniorPepe@1.com", body: "hey pepe!"),
+        Message(sender: "pepe@1.com", body: "hey senior pepe"),
+        Message(sender: "seniorPepe@1.com", body: "tonight we good pepe?")
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "🐸PepeChat"
+        
+        //tableView.delegate = self
+        tableView.dataSource = self
+        title = K.appName
         navigationItem.hidesBackButton = true
 
     }
@@ -35,3 +43,25 @@ class ChatViewController: UIViewController {
     
 
 }
+
+
+extension ChatViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
+        cell.textLabel?.text = messages[indexPath.row].body
+        return cell
+    }
+    
+    
+}
+
+// If we want to intract with the pressing the cells
+//extension ChatViewController : UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print(indexPath)
+//    }
+//}

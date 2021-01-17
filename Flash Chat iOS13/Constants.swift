@@ -10,6 +10,7 @@ import Foundation
 
 
 struct K {
+    static let appName = "🐸PepeChat"
     static let cellIdentifier = "ReusableCell"
     static let cellNibName = "MessageCell"
     static let registerSegue = "RegisterToChat"
