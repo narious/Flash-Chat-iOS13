@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class ChatViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -15,9 +15,21 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "🐸PepeChat"
+        navigationItem.hidesBackButton = true
 
     }
     
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            
+            // If successfull we should go back to the root view controller
+            navigationController?.popToRootViewController(animated: true)
+        } catch let sighOutError as NSError {
+            print("Error signing out: %@", sighOutError)
+        }
+    }
     @IBAction func sendPressed(_ sender: UIButton) {
     }
     
