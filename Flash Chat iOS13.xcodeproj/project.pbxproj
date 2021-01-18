@@ -21,6 +21,8 @@
 		4CCB685D25B4139100C19EBF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB685C25B4139100C19EBF /* Constants.swift */; };
 		4CCB686525B4161F00C19EBF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB686425B4161F00C19EBF /* Message.swift */; };
 		4CCB686825B4186700C19EBF /* gitignore.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CCB686725B4186700C19EBF /* gitignore.txt */; };
+		4CCB686C25B59EA700C19EBF /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCB686A25B59EA700C19EBF /* MessageCell.swift */; };
+		4CCB686D25B59EA700C19EBF /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CCB686B25B59EA700C19EBF /* MessageCell.xib */; };
 		75232E1D2135B8AF3092811C /* libPods-Flash Chat iOS13.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BABE1ED25B1082FBF2E45646 /* libPods-Flash Chat iOS13.a */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		4CCB685C25B4139100C19EBF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4CCB686425B4161F00C19EBF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4CCB686725B4186700C19EBF /* gitignore.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gitignore.txt; sourceTree = "<group>"; };
+		4CCB686A25B59EA700C19EBF /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		4CCB686B25B59EA700C19EBF /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		6F79036A36B8B47B98B03760 /* Pods-Flash Chat iOS13.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash Chat iOS13.release.xcconfig"; path = "Target Support Files/Pods-Flash Chat iOS13/Pods-Flash Chat iOS13.release.xcconfig"; sourceTree = "<group>"; };
 		BABE1ED25B1082FBF2E45646 /* libPods-Flash Chat iOS13.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flash Chat iOS13.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -110,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				0B62817C235DEE8100E35CAF /* Main.storyboard */,
+				4CCB686A25B59EA700C19EBF /* MessageCell.swift */,
+				4CCB686B25B59EA700C19EBF /* MessageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +210,7 @@
 				4CCB682225B2BF3900C19EBF /* GoogleService-Info.plist in Resources */,
 				0B62819E235F0F4D00E35CAF /* README.md in Resources */,
 				0B62817E235DEE8100E35CAF /* Main.storyboard in Resources */,
+				4CCB686D25B59EA700C19EBF /* MessageCell.xib in Resources */,
 				4CCB686825B4186700C19EBF /* gitignore.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +272,7 @@
 				4CCB686525B4161F00C19EBF /* Message.swift in Sources */,
 				0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */,
 				0B62818D235DF00B00E35CAF /* RegisterViewController.swift in Sources */,
+				4CCB686C25B59EA700C19EBF /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

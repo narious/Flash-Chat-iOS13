@@ -16,7 +16,8 @@ class ChatViewController: UIViewController {
     var messages = [
         Message(sender: "seniorPepe@1.com", body: "hey pepe!"),
         Message(sender: "pepe@1.com", body: "hey senior pepe"),
-        Message(sender: "seniorPepe@1.com", body: "tonight we good pepe?")
+        Message(sender: "seniorPepe@1.com", body: "tonight we good pepe?"),
+        Message(sender: "seniorPepe@1.com", body: "In probability theory, a normal (or Gaussian or Gauss or Laplace–Gauss) distribution is a type of continuous probability distribution for a mu")
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class ChatViewController: UIViewController {
         //tableView.delegate = self
         tableView.dataSource = self
         title = K.appName
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         navigationItem.hidesBackButton = true
 
     }
@@ -51,8 +53,8 @@ extension ChatViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row].body
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
+        cell.label.text = messages[indexPath.row].body
         return cell
     }
     
