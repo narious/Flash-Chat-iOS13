@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Added firebase
         FirebaseApp.configure()
+        
+        // add the firebase database
+        let db = Firestore.firestore()
+        
+        print(db)
         return true
     }
 

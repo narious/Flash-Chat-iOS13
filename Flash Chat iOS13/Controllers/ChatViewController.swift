@@ -13,6 +13,9 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
+    // Adding a reference to our database
+    let db = Firestore.firestore()
+    
     var messages = [
         Message(sender: "seniorPepe@1.com", body: "hey pepe!"),
         Message(sender: "pepe@1.com", body: "hey senior pepe"),
@@ -41,6 +44,10 @@ class ChatViewController: UIViewController {
         }
     }
     @IBAction func sendPressed(_ sender: UIButton) {
+        
+        if let messageBody = messageTextfield.text, let messageSender - Auth.auth().currentUser?.email {
+            
+        }
     }
     
 
