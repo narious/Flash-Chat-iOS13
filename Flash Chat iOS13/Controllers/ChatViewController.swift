@@ -30,9 +30,38 @@ class ChatViewController: UIViewController {
         title = K.appName
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         navigationItem.hidesBackButton = true
+        
+        loadMessages()
 
     }
     
+    func loadMessages() {
+        messages = []
+        
+        // Returns a query snapshot which is a NS object
+        db.collection(K.FStore.collectionName).getDocuments { (querySnapshot, error) in
+            if let e = error {
+                print("An error occured in loading messages from the  firebase db, \(e)")
+            } else {
+                // Loop through through the sanpshot documents
+                if let snapshopDocs = querySnapshot?.documents {
+                    for doc in snapshopDocs {
+                        let data = doc.data()
+                        if let sender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
+                            self.messages.append(Message(sender: sender, body: messageBody))
+                            
+                            // We need to releod the data from the dable view, but we need to do asych
+                            // since its in the background
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
@@ -45,8 +74,16 @@ class ChatViewController: UIViewController {
     }
     @IBAction func sendPressed(_ sender: UIButton) {
         
-        if let messageBody = messageTextfield.text, let messageSender - Auth.auth().currentUser?.email {
-            
+        if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
+            // we named it messages a string. & sender field is just "sender"
+            db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField : messageSender,
+                                                                      K.FStore.bodyField: messageBody]) { (error) in
+                if let e = error {
+                    print("There was an issue saving data to firestore, \(e)")
+                } else {
+                    print("succesfully saved data!")
+                }
+            }
         }
     }
     
