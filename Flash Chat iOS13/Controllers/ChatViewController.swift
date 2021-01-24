@@ -16,12 +16,7 @@ class ChatViewController: UIViewController {
     // Adding a reference to our database
     let db = Firestore.firestore()
     
-    var messages = [
-        Message(sender: "seniorPepe@1.com", body: "hey pepe!"),
-        Message(sender: "pepe@1.com", body: "hey senior pepe"),
-        Message(sender: "seniorPepe@1.com", body: "tonight we good pepe?"),
-        Message(sender: "seniorPepe@1.com", body: "In probability theory, a normal (or Gaussian or Gauss or Laplace–Gauss) distribution is a type of continuous probability distribution for a mu")
-    ]
+    var messages: [Message] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,10 +31,13 @@ class ChatViewController: UIViewController {
     }
     
     func loadMessages() {
-        messages = []
         
-        // Returns a query snapshot which is a NS object
-        db.collection(K.FStore.collectionName).getDocuments { (querySnapshot, error) in
+        // Returns a query snapshot which is a NS object = an event listener
+        db.collection(K.FStore.collectionName)
+            .order(by: K.FStore.dateField)
+            .addSnapshotListener { (querySnapshot, error) in
+            
+            self.messages = []  // but we lose them hmm
             if let e = error {
                 print("An error occured in loading messages from the  firebase db, \(e)")
             } else {
@@ -75,9 +73,13 @@ class ChatViewController: UIViewController {
     @IBAction func sendPressed(_ sender: UIButton) {
         
         if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
-            // we named it messages a string. & sender field is just "sender"
-            db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField : messageSender,
-                                                                      K.FStore.bodyField: messageBody]) { (error) in
+            // we named it messages a string. & sender field is just "sender" the document can be any fomat
+            db.collection(K.FStore.collectionName)
+                .addDocument(
+                    data: [K.FStore.senderField : messageSender,
+                           K.FStore.bodyField: messageBody,
+                           K.FStore.dateField: Date().timeIntervalSince1970])
+                { (error) in
                 if let e = error {
                     print("There was an issue saving data to firestore, \(e)")
                 } else {
